@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class='card-content'>
+    <h1>List of Events</h1>
+    <div class="card-content-main">
+        {% for event in events %}
+        <div class="event-card">
+            <img src="{{event.image.url}}" />
+            <div class="event-meta">
+                <h4>{{ event.event_name}}</h4>
+                <p>{{ event.data}}, {{ event.time }}</p>
+                <p>{{ event.location }} </p>
+                <div class="like">
+                    <div class="like-div">
+                    {% if event.is_liked %}
+                    <i data-id={{event.pk}} class="fas fa-heart colors"></i>
+                    {% else %}
+                    <i data-id={{event.pk}} class="far fa-heart"></i>
+                    {% endif %}
+                </div>
+                </div>
+            </div>
+
+        </div>
+        {% empty %}
+        <div>
+            <h1>You haven't created any events yet</h1>
+            <a href="{% url 'addEvent' %}">Add your first Event here.</a>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{%endblock%}
